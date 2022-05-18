@@ -30,14 +30,12 @@ class Homepage extends React.Component {
         {this.head()}
         <h1>
           {auth && firstName && lastName
-            ? `Welcome to prilltech, ${firstName} ${lastName}!`
+            ? `Welcome to PrillTech, ${firstName} ${lastName}!`
             : "Welcome!"}
         </h1>
         <p>
-          Current Initiative: OAuth2.0 Google Integration & Redux State
-          Management System. <br />
-          Feel free to demo the login feature, no data is retained beyond
-          browser storage.
+          Key calulation system is currently undergoing maintenance. Please
+          Standby while we grow more IQ points.
         </p>
         <div style={{ paddingBottom: "24px" }} id="account-login-feature">
           {auth ? <Logout /> : <Login />}
@@ -51,7 +49,7 @@ class Homepage extends React.Component {
             });
           }}
         >
-          Hydration Check
+          Calculate
         </button>
       </>
     );
