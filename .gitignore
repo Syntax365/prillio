@@ -1,2 +1,6 @@
 node_modules
+build/bundle.js
+build/public/client_bundle.js
+build/public/client_bundle.js.LICENSE.txt
 yarn-error.log
+.env
