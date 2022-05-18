@@ -1,0 +1,24 @@
+{
+  "name": "prillio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Syntax365/prillio.git"
+  },
+  "author": "Tyler Prill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Syntax365/prillio/issues"
+  },
+  "homepage": "https://github.com/Syntax365/prillio#readme",
+  "description": "",
+  "dependencies": {
+    "express": "4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
