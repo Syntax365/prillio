@@ -4,7 +4,7 @@ const app = express();
 const port = 8080;
 
 app.get("*", (req, res) => {
-  res.send("Panda is a penis devil");
+  res.send("Panda is a test devil");
 });
 
 app.listen(port, () => {
