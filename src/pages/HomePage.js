@@ -11,11 +11,12 @@ class Homepage extends React.Component {
         meta={[
           {
             name: "description",
-            content: "TODO: Add meta page description for SEO",
+            content:
+              "A simple resource for calulating key gold for simple minded individules",
           },
         ]}
       >
-        <title>Homepage</title>
+        <title>Key Calculator</title>
       </Helmet>
     );
   }
