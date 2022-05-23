@@ -1,86 +1,103 @@
 import React from "react";
-import { Helmet } from "react-helmet";
-import { connect } from "react-redux";
+import Grid from "../components/Grid";
 
-import analytics from "../helper_functions/analytics";
+function HomePage() {
+  const width = 30;
+  const height = 30;
 
-class Homepage extends React.Component {
-  head() {
-    return (
-      <Helmet
-        meta={[
-          {
-            name: "description",
-            content:
-              "A simple resource for calulating key gold for simple minded individules",
-          },
-        ]}
-      >
-        <title>Key Calculator</title>
-      </Helmet>
-    );
+  //Functions here
+  function runCode() {
+    const initialize2DArray = (n, m) => {
+      let d = [];
+      for (let i = 0; i < n; i++) {
+        let t = Array(m).fill(0);
+        d.push(t);
+      }
+      return d;
+    };
+
+    let n, m, x, y;
+    const spiralMatrixIII = (
+      rows = width,
+      cols = height,
+      rStart = 10,
+      cStart = 9,
+    ) => {
+      (n = rows), (m = cols), (x = rStart), (y = cStart);
+      let tot = n * m,
+        d = "R",
+        res = [],
+        visit = initialize2DArray(n, m);
+      while (res.length < tot) {
+        if (ok(x, y)) {
+          res.push([x, y]);
+          visit[x][y] = 1;
+        }
+        if (d == "R") {
+          y++;
+          if (ok(x + 1, y)) {
+            if (!visit[x + 1][y]) d = "D"; // go right, down neighbour not visited, turn
+          } else {
+            d = "D"; // out of border turn
+          }
+        } else if (d == "D") {
+          x++;
+          if (ok(x, y - 1)) {
+            if (!visit[x][y - 1]) d = "L"; // go down, left neighbour not visited, turn
+          } else {
+            d = "L";
+          }
+        } else if (d == "L") {
+          y--;
+          if (ok(x - 1, y)) {
+            if (!visit[x - 1][y]) d = "U"; // go left, up neighbour not visited, turn
+          } else {
+            d = "U";
+          }
+        } else if (d == "U") {
+          x--;
+          if (ok(x, y + 1)) {
+            if (!visit[x][y + 1]) d = "R"; // go up, right neighbour not visited, turn
+          } else {
+            d = "R";
+          }
+        }
+      }
+      return res;
+    };
+
+    const ok = (x, y) => x >= 0 && x < n && y >= 0 && y < m;
+
+    let executionPath = spiralMatrixIII();
+    let delay = 25;
+    executionPath.forEach((coord) => {
+      document
+        .querySelectorAll(`[coordinates="${coord[0]},${coord[1]}"]`)
+        .forEach((element) => {
+          setTimeout(() => {
+            element.classList.add("color-red");
+          }, delay);
+          delay += 25;
+        });
+    });
   }
 
-  render() {
-    return (
-      <>
-        {this.head()}
-        <h1>
-          Welcome to the <>PRILLIO</> Key Calculator
-        </h1>
-        <div id="key-calculator">
-          <p style={{ fontWeight: 700 }}>Key Amount: </p>
-          <input id="key-amount"></input>
-        </div>
-        <div id="key-price-breakdown">
-          <p style={{ fontWeight: 700 }}>Key Price Breakdown:</p>
-          <p>
-            Advertiser (5%) : <span id="advertiser">0</span> gold
-          </p>
-          <p>
-            Key Holder (5%) : <span id="holder">0</span> gold
-          </p>
-          <p>
-            Key Runners 80% (20% Each) : <span id="runner">0</span> gold
-          </p>
-          <p>
-            Guild Bank (10%) : <span id="bank">0</span> gold
-          </p>
-        </div>
-        <button
-          onClick={() => {
-            analytics.track({
-              category: "Home Page - Hydration Button",
-              action: "Click",
-              label: "Click CTA",
-            });
-
-            //Do Key Calulations
-            const keyPrice = document.getElementById("key-amount").value;
-
-            document.getElementById("advertiser").innerText = keyPrice * 0.05;
-            document.getElementById("holder").innerText = keyPrice * 0.05;
-            document.getElementById("runner").innerText = keyPrice * 0.2;
-            document.getElementById("bank").innerText = keyPrice * 0.1;
-          }}
-        >
-          Calculate
-        </button>
-      </>
-    );
+  function clearGrid(width = width, height = height) {
+    let clearArr = document.getElementsByClassName("color-red");
+    for (let i = 0; i < clearArr.length; i++) {
+      clearArr[i].classList.remove("color-red");
+    }
   }
+
+  return (
+    <>
+      <div id={"Grid-1"} key={"1"}>
+        <Grid width={width} height={height} />
+      </div>
+      <button onClick={runCode}>Run Code</button>
+      <button onClick={clearGrid}>Clear</button>
+    </>
+  );
 }
 
-const mapStateToProps = ({ holderCut, runnderCut, bankCut, avertiserCut }) => ({
-  holderCut,
-  runnderCut,
-  bankCut,
-  avertiserCut,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeText: () =>
-    dispatch({ type: "set_firstname", payload: "banana snacks" }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
+export default HomePage;

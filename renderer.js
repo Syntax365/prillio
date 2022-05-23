@@ -30,7 +30,7 @@ export default function renderer(req, res) {
           <StaticRouter location={req.url} context={context}>
             <App />
           </StaticRouter>
-        </Provider>
+        </Provider>,
       );
 
       const preloadedState = store.getState();
@@ -45,13 +45,14 @@ export default function renderer(req, res) {
             <meta name="viewport" content="width=320, initial-scale=1">
             ${helmet.meta.toString()}
             ${helmet.title.toString()}
+            <style>.color-red{background-color:red}.color-blue{background-color:blue}</style>
         </head>
         <body>
             ${gtmBody}
             <div id="root">${content}</div>    
         </body>
         <script>window.__PRELOADED_STATE__ = ${JSON.stringify(
-          preloadedState
+          preloadedState,
         ).replace(/</g, "\\u003c")}</script>
         <script src="client_bundle.js"></script>
     </html>`;
