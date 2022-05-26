@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "webpack:development:client": "webpack --mode=development --config webpack.client.js --watch",
     "webpack:development:server": "webpack --mode=development --config webpack.server.js --watch",
