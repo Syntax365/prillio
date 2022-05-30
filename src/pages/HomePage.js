@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import Grid from "../components/Grid";
 import Editor from "@monaco-editor/react";
+
+import Grid from "../components/Grid";
+import Toolbar from "../components/Toolbar";
 
 function HomePage() {
   const width = 30;
@@ -42,6 +44,7 @@ function HomePage() {
 
   return (
     <>
+      <Toolbar />
       <Grid width={width} height={height} />
       <Editor
         height="400px"
